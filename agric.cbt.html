@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SS1 Agricultural Science CBT - Secure Mode</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #27ae60; padding-bottom: 15px; position: sticky; top: 0; background: white; z-index: 100; }
+        .timer { font-size: 22px; font-weight: bold; color: #e74c3c; background: #fee; padding: 5px 15px; border-radius: 8px; border: 1px solid #e74c3c; }
+        .question-box { margin-top: 30px; min-height: 300px; }
+        .question { display: none; }
+        .active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .options { list-style: none; padding: 0; }
+        .options li { margin: 12px 0; background: #fff; padding: 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; border: 2px solid #eee; display: flex; align-items: center; }
+        .options li:hover { border-color: #27ae60; background: #f0fff4; }
+        .options input { margin-right: 15px; transform: scale(1.2); cursor: pointer; }
+        .footer { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+        .btn { padding: 12px 25px; cursor: pointer; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        .btn-next { background: #27ae60; color: white; }
+        .btn-prev { background: #95a5a6; color: white; }
+        .btn-submit { background: #c0392b; color: white; display: none; }
+        #violation-screen, #result-screen { display: none; text-align: center; padding: 50px; }
+        h3 { color: #2c3e50; line-height: 1.5; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+<div id="exam-box" class="container">
+    <div class="header">
+        <div>
+            <h2 style="margin:0; color:#27ae60;">AGRICULTURAL SCIENCE – SS1</h2>
+            <small>Final Mock Examination</small>
+        </div>
+        <div class="timer">Time: <span id="time">40:00</span></div>
+    </div>
+
+    <form id="quizForm">
+        <div class="question-box" id="questionContainer">
+            </div>
+
+        <div class="footer">
+            <button type="button" class="btn btn-prev" id="prevBtn" onclick="changeQuestion(-1)">Previous</button>
+            <span id="qCount" style="align-self:center; font-weight:bold;"></span>
+            <button type="button" class="btn btn-next" id="nextBtn" onclick="changeQuestion(1)">Next</button>
+            <button type="button" class="btn btn-submit" id="submitBtn" onclick="submitExam()">Submit Exam</button>
+        </div>
+    </form>
+</div>
+
+<div id="violation-screen" class="container">
+    <h1 style="color:#c0392b;">SECURITY VIOLATION</h1>
+    <p style="font-size:18px;">You exited the exam tab or window. Your session has been terminated automatically to prevent cheating.</p>
+    <button onclick="location.reload()" class="btn btn-next">Restart Exam</button>
+</div>
+
+<div id="result-screen" class="container">
+    <h1 style="color:#27ae60;">Exam Completed</h1>
+    <p style="font-size:24px;" id="scoreDisplay"></p>
+    <div id="remark" style="font-weight:bold; font-size:18px; margin-bottom:20px;"></div>
+    <button onclick="location.reload()" class="btn btn-next">Retry</button>
+</div>
+
+<script>
+    const examData = [
+        { q: "Agriculture can best be defined as:", a: "B", ops: ["The cultivation of crops alone", "The science, art and business of crop and animal production", "The rearing of animals for consumption", "The processing of farm produce"] },
+        { q: "Which of the following is NOT a branch of agriculture?", a: "D", ops: ["Agronomy", "Animal Science", "Aquaculture", "Astronomy"] },
+        { q: "Subsistence farming differs from commercial farming because it:", a: "C", ops: ["Uses irrigation extensively", "Involves mechanization", "Is mainly for family consumption", "Encourages exportation"] },
+        { q: "A farmer plants maize after harvesting cowpea to improve soil fertility. This practice is based on:", a: "B", ops:
